@@ -5,13 +5,18 @@ export interface ResultadoImportacionMoodle {
   total: number;
   importadas: number;
   errores: string[];
+  bancoNombre?: string;
 }
 
 export async function importarMoodleXml(
   xmlContent: string,
   userId: string,
-  documentId?: string
+  fileName?: string
 ): Promise<ResultadoImportacionMoodle> {
+  const bancoNombre = fileName
+    ? fileName.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())
+    : 'Banco Moodle';
+
   const parser = new XMLParser({
     ignoreAttributes: false,
     attributeNamePrefix: '@_',
@@ -47,6 +52,12 @@ export async function importarMoodleXml(
         continue;
       }
 
+      // Explicación / retroalimentación general
+      const generalFeedbackRaw = q.generalfeedback?.text || q.generalfeedback || '';
+      const explanation = typeof generalFeedbackRaw === 'string'
+        ? generalFeedbackRaw.trim()
+        : (generalFeedbackRaw?.text ? String(generalFeedbackRaw.text).trim() : null);
+
       let tipoDb = 'MCQ_SINGLE';
       if (qType === 'truefalse') {
         tipoDb = 'TRUE_FALSE';
@@ -78,7 +89,8 @@ export async function importarMoodleXml(
         optionsData.push({ label: 'B', text: 'Falso', isCorrect: correctFalse, position: 2 });
       } else if (tipoDb === 'SHORT_ANSWER') {
         const correctText = answersList.find((a: any) => Number(a['@_fraction'] ?? 0) > 0)?.text || '';
-        optionsData.push({ label: 'A', text: typeof correctText === 'string' ? correctText : String(correctText), isCorrect: true, position: 1 });
+        const ansText = typeof correctText === 'string' ? correctText.trim() : String(correctText);
+        optionsData.push({ label: 'A', text: ansText, isCorrect: true, position: 1 });
       } else {
         let pos = 1;
         for (const ans of answersList) {
@@ -108,11 +120,12 @@ export async function importarMoodleXml(
         data: {
           type: tipoDb,
           statement,
+          explanation: explanation || null,
+          topic: bancoNombre,
           points: Number.isNaN(defaultGrade) ? 1 : defaultGrade,
           status: 'APPROVED',
           origin: 'IMPORTED',
           authorId: userId,
-          documentId: documentId || null,
           options: {
             create: optionsData,
           },
@@ -129,5 +142,6 @@ export async function importarMoodleXml(
     total: questions.length,
     importadas,
     errores,
+    bancoNombre,
   };
 }

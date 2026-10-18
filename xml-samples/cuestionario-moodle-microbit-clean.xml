@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="multichoice">
+    <name><text>Pregunta 1 (DOK 2) - Ejecución de código al encender</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Un estudiante programa un proyecto en MakeCode para dar la bienvenida en una feria de ciencias. Requiere que al conectar la batería a la Micro:bit se ejecute una melodía y un mensaje de saludo <b>una sola vez</b>, y que posteriormente la placa quede lista para recibir interacciones. ¿En qué bloque de control debe colocar estas instrucciones iniciales?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<p><b>Explicación de la respuesta correcta:</b> El bloque <b>Al iniciar</b> (<i>On start</i>) es el bloque de configuración inicial en MakeCode. Todo el código colocado dentro de él se ejecuta automáticamente una sola vez cuando la Micro:bit se enciende o se reinicia, lo cual es el procedimiento estándar para mostrar saludos iniciales o configurar variables antes de pasar al ciclo principal.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html"><text><![CDATA[<p>Respuesta correcta.</p>]]></text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text><![CDATA[<p>Respuesta parcialmente correcta.</p>]]></text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text><![CDATA[<p>Respuesta incorrecta.</p>]]></text></incorrectfeedback>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>En el bucle <i>Para siempre</i> (Forever), porque asegura que el mensaje no se borre.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p>En el bloque <i>Al iniciar</i> (On start), ya que se ejecuta secuencialmente una única vez al energizar la placa.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>¡Correcto! Esta es la respuesta adecuada.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Dentro de un evento <i>Al presionar el botón A</i>, pues requiere acción directa del usuario.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>En el bloque de entrada <i>Si agitación</i>, para activar la bienvenida con movimiento.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+  </question>
+  <question type="multichoice">
+    <name><text>Pregunta 2 (DOK 2) - Clasificación de Entradas y Salidas</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Al diseñar un sistema de alarma física con la Micro:bit, se necesita registrar variables del entorno y emitir respuestas físicas. ¿Cuál de las siguientes opciones clasifica correctamente un componente de <b>Entrada (Input)</b> y uno de <b>Salida (Output)</b> nativos de la placa?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<p><b>Explicación de la respuesta correcta:</b> Los sensores (como el sensor de temperatura, botones, acelerómetro, brújula y micrófono) capturan datos del entorno hacia el microcontrolador (<b>Entradas</b>), mientras que la matriz de LEDs, el altavoz o los actuadores conectados emiten información o acciones hacia el exterior (<b>Salidas</b>).</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html"><text><![CDATA[<p>Respuesta correcta.</p>]]></text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text><![CDATA[<p>Respuesta parcialmente correcta.</p>]]></text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text><![CDATA[<p>Respuesta incorrecta.</p>]]></text></incorrectfeedback>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Entrada: Matriz de 25 LEDs / Salida: Botón A</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p>Entrada: Sensor de temperatura integrado / Salida: Matriz de 25 LEDs</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>¡Correcto! Esta es la respuesta adecuada.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Entrada: Altavoz integrado / Salida: Micrófono con detector de nivel de ruido</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Entrada: Antena de Radio / Salida: Conector de batería JST</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+  </question>
+  <question type="multichoice">
+    <name><text>Pregunta 3 (DOK 2) - Identificación de Hardware v1 vs v2</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Un docente desea trabajar un proyecto de reconocimiento de patrones de sonido ambiental directamente con la placa Micro:bit, sin añadir accesorios externos ni soldaduras. ¿Qué versión de la placa debe utilizar y qué componente nativo permite esta función?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<p><b>Explicación de la respuesta correcta:</b> La <b>Micro:bit versión 2 (v2)</b> incorpora de fábrica un micrófono MEMS con un LED indicador de actividad acústica y un sensor de nivel de sonido, características que no están presentes de forma nativa en la versión 1 (v1).</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html"><text><![CDATA[<p>Respuesta correcta.</p>]]></text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text><![CDATA[<p>Respuesta parcialmente correcta.</p>]]></text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text><![CDATA[<p>Respuesta incorrecta.</p>]]></text></incorrectfeedback>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Micro:bit v1, utilizando la matriz de LEDs en modo de captura acústica.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p>Micro:bit v2, utilizando su micrófono integrado con indicador LED de sonido.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>¡Correcto! Esta es la respuesta adecuada.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Micro:bit v1, conectando un micrófono análogo al pin 0.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Micro:bit v2, activando el sensor de radio en frecuencia de audio.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+  </question>
+  <question type="multichoice">
+    <name><text>Pregunta 4 (DOK 2) - Conexión de Circuitos Básicos con Pines</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Se requiere conectar un módulo de sensor externo de 3V a la Micro:bit utilizando cables con pinzas caimán. Para alimentar de energía eléctrica el sensor y cerrar el circuito de masa correctamente, ¿a qué pines principales de la parte inferior de la placa se deben realizar las conexiones?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<p><b>Explicación de la respuesta correcta:</b> En computación física con Micro:bit, el pin <b>3V</b> suministra el voltaje continuo necesario (3 Voltios) para alimentar componentes externos, mientras que el pin <b>GND</b> (Ground/Tierra) proporciona la línea de retorno obligatoria para cerrar el circuito eléctrico.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html"><text><![CDATA[<p>Respuesta correcta.</p>]]></text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text><![CDATA[<p>Respuesta parcialmente correcta.</p>]]></text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text><![CDATA[<p>Respuesta incorrecta.</p>]]></text></incorrectfeedback>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Pin 0 para energía y Pin 1 para tierra.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p>Pin 3V para alimentación eléctrica y Pin GND para la referencia de tierra.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>¡Correcto! Esta es la respuesta adecuada.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Pin 2 para señal y Pin 3V para masa.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Pin GND para energía positiva y Pin BUS para retorno.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+  </question>
+  <question type="multichoice">
+    <name><text>Pregunta 5 (DOK 2) - Entornos de Programación en MakeCode</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>MakeCode ofrece una plataforma flexible para la enseñanza de la programación. Si un estudiante inicia construyendo su lógica con bloques visuales y desea realizar una transición hacia el código escrito basado en texto, ¿cuáles son los lenguajes estándar soportados por la interfaz de MakeCode para alternar la vista?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<p><b>Explicación de la respuesta correcta:</b> MakeCode permite convertir el código de bloques de manera bidireccional a código de texto en <b>JavaScript</b> (TypeScript) y en <b>Python</b>, facilitando la progresión pedagógica desde la programación visual hacia la textual.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html"><text><![CDATA[<p>Respuesta correcta.</p>]]></text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text><![CDATA[<p>Respuesta parcialmente correcta.</p>]]></text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text><![CDATA[<p>Respuesta incorrecta.</p>]]></text></incorrectfeedback>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>C++ y Java</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p>JavaScript y Python</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>¡Correcto! Esta es la respuesta adecuada.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>HTML5 y PHP</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Scratch y Swift</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+  </question>
+  <question type="multichoice">
+    <name><text>Pregunta 6 (DOK 2) - Uso del Simulador para Pruebas de Movimiento</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Durante el desarrollo de un dado electrónico que responde al movimiento, un estudiante no cuenta con la placa física en ese momento. ¿Cómo permite el laboratorio virtual de MakeCode probar el evento de agitar la placa?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<p><b>Explicación de la respuesta correcta:</b> Cuando se incluye en el código un bloque de evento basado en el acelerómetro (como <i>si se agita</i>), el simulador de MakeCode muestra de forma automática un botón interactivo llamado <b>Shake</b> (o un ícono de movimiento) para simular la fuerza de aceleración desde la pantalla.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html"><text><![CDATA[<p>Respuesta correcta.</p>]]></text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text><![CDATA[<p>Respuesta parcialmente correcta.</p>]]></text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text><![CDATA[<p>Respuesta incorrecta.</p>]]></text></incorrectfeedback>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>No es posible probar eventos de movimiento sin la placa física conectada por USB.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p>El simulador despliega automáticamente un botón virtual 'Shake' (Agitar) al detectar bloques de acelerómetro.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>¡Correcto! Esta es la respuesta adecuada.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Se debe escribir un comando especial en la consola de depuración para simular gravedad.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Inclinando físicamente el monitor del computador donde corre el simulador.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+  </question>
+  <question type="multichoice">
+    <name><text>Pregunta 7 (DOK 2) - Comportamiento de la Matriz de LEDs</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>La pantalla integrada de la Micro:bit está compuesta por una matriz de diodos emisores de luz (LED). ¿Cuál es la disposición geométrica estándar de esta matriz y qué otra función física secundaria puede realizar según la literatura técnica?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<p><b>Explicación de la respuesta correcta:</b> La pantalla de la Micro:bit cuenta con <b>25 LEDs dispuestos en una cuadrícula de 5x5</b>. Además de emitir luz y mostrar gráficos, los LEDs se pueden multiplexar temporalmente para medir la luz ambiental detectando la pequeña carga eléctrica que generan al ser expuestos a fotones.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html"><text><![CDATA[<p>Respuesta correcta.</p>]]></text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text><![CDATA[<p>Respuesta parcialmente correcta.</p>]]></text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text><![CDATA[<p>Respuesta incorrecta.</p>]]></text></incorrectfeedback>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Matriz de 4x4 LEDs (16 puntos) / Funciona como altavoz de alta frecuencia.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p>Matriz de 5x5 LEDs (25 puntos) / Puede actuar como sensor de luz ambiental midiendo la corriente inversa.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>¡Correcto! Esta es la respuesta adecuada.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Matriz de 8x8 LEDs (64 puntos) / Actúa como antena receptor Wi-Fi.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Matriz de 3x3 LEDs (9 puntos) / Mide la presión atmosférica del entorno.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+  </question>
+  <question type="multichoice">
+    <name><text>Pregunta 8 (DOK 2) - Botón de reinicio y puerto USB</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>En la parte trasera de la placa Micro:bit se ubican varios componentes de conectividad y control. ¿Qué función cumple el botón físico situado al lado del puerto Micro-USB en la parte posterior?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<p><b>Explicación de la respuesta correcta:</b> El botón trasero junto al puerto USB es el botón de <b>Reset / Reinicio</b>. Al presionarlo rápidamente vuelve a ejecutar el programa grabado desde el inicio (ejecutando de nuevo el bloque <i>Al iniciar</i>).</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html"><text><![CDATA[<p>Respuesta correcta.</p>]]></text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text><![CDATA[<p>Respuesta parcialmente correcta.</p>]]></text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text><![CDATA[<p>Respuesta incorrecta.</p>]]></text></incorrectfeedback>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Cambiar el volumen del altavoz integrado.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p>Reiniciar la ejecución del programa cargado (Reset) o entrar en modo de actualización de firmware.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>¡Correcto! Esta es la respuesta adecuada.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Encender la linterna de la matriz de LEDs.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Borrar permanentemente el sistema operativo de la placa.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+  </question>
+  <question type="multichoice">
+    <name><text>Pregunta 9 (DOK 3) - Diagnóstico de Flujo de Programa y Bloqueos</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Un estudiante programa el siguiente código: en el bloque <i>Para siempre</i> coloca la instrucción <code>mostrar cadena ('Bienvenidos a la feria de robótica educativa')</code> y luego la instrucción <code>mostrar ícono (Carita Feliz)</code>. Al probar el proyecto en la placa, nota que la carita feliz casi nunca se observa o tarda demasiado en aparecer. ¿Cuál es la causa técnica de este comportamiento y qué decisión estratégica de programación resuelve el problema de fluidez?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<p><b>Explicación de la respuesta correcta:</b> La instrucción de mostrar una cadena larga de texto hace que la pantalla despliegue letra por letra en un proceso bloqueante que consume tiempo. Como el bucle <i>Para siempre</i> ejecuta las instrucciones en secuencia estricta, la carita feliz solo se muestra un instante al terminar el texto antes de reiniciar el mensaje inmediatamente. Reducir la longitud del texto o separar eventos optimiza la experiencia de usuario.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html"><text><![CDATA[<p>Respuesta correcta.</p>]]></text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text><![CDATA[<p>Respuesta parcialmente correcta.</p>]]></text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text><![CDATA[<p>Respuesta incorrecta.</p>]]></text></incorrectfeedback>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>La Micro:bit no tiene suficiente memoria RAM para mostrar texto y gráficos en el mismo bucle.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p>La función de desplazar texto es bloqueante y tarda varios segundos en completarse carácter por carácter antes de pasar a la siguiente línea del bucle; la solución es reducir el texto a una sigla corta o activar la carita mediante un evento de botón.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>¡Correcto! Esta es la respuesta adecuada.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>El bloque <i>Para siempre</i> destruye las imágenes antes de enviarlas a la matriz de LEDs.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Hay un cortocircuito en el puerto USB que ralentiza el procesamiento del procesador ARM.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+  </question>
+  <question type="multichoice">
+    <name><text>Pregunta 10 (DOK 3) - Selección de Red e Interconexión de Placas</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Un grupo de investigación busca crear una red de estaciones meteorológicas escolares ubicadas en el patio de la escuela donde no hay cobertura de Internet ni router Wi-Fi. Necesitan que 4 placas Micro:bit envíen datos de temperatura a una placa central recaudadora. ¿Qué funcionalidad inalámbrica nativa de la Micro:bit se debe seleccionar y cómo se debe configurar estratégicamente?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<p><b>Explicación de la respuesta correcta:</b> La Micro:bit incluye una radio de 2.4 GHz que permite comunicación propia punto a punto o multipunto sin necesidad de infraestructura de red externa (sin Wi-Fi ni Internet). Para que las placas se comuniquen entre sí, es indispensable configurar el mismo <b>Grupo de Radio</b> (ID de canal) en todas ellas.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html"><text><![CDATA[<p>Respuesta correcta.</p>]]></text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text><![CDATA[<p>Respuesta parcialmente correcta.</p>]]></text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text><![CDATA[<p>Respuesta incorrecta.</p>]]></text></incorrectfeedback>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Usar la antena Bluetooth para conectarse a un servidor en la nube de Moodle.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p>Usar el bloque de funcionalidad 'Radio', asignando a todas las placas el mismo grupo de radio (Radio Group) para canalizar los paquetes de datos.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>¡Correcto! Esta es la respuesta adecuada.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Conectar todas las placas mediante cables al pin 3V en paralelo.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Configurar la matriz de LEDs de cada placa para enviar código Morse visual hacia una cámara.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+  </question>
+  <question type="multichoice">
+    <name><text>Pregunta 11 (DOK 3) - Diagnóstico de Fallas de Hardware y Sensores</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Se programa una brújula digital que debe mostrar la dirección en grados (0° a 360°) en la matriz de LEDs. En el simulador de MakeCode el código funciona perfectamente girando la brújula virtual, pero al descargarlo a la placa física Micro:bit por primera vez, la matriz muestra un patrón animado de puntos que se mueven hacia los bordes y no ejecuta el programa principal. ¿Qué diagnóstico es el correcto y qué acción debe realizar el usuario?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<p><b>Explicación de la respuesta correcta:</b> Al usar el sensor magnético (brújula) por primera vez o tras cambiar de entorno magnético, la Micro:bit ejecuta automáticamente una rutina de <b>calibración del magnetómetro</b> (solicitando girar la placa para inclinarla y encender todos los puntos de la pantalla) con el fin de mapear las distorsiones magnéticas locales.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html"><text><![CDATA[<p>Respuesta correcta.</p>]]></text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text><![CDATA[<p>Respuesta parcialmente correcta.</p>]]></text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text><![CDATA[<p>Respuesta incorrecta.</p>]]></text></incorrectfeedback>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>La placa tiene una falla de fábrica en el microcontrolador y debe ser reemplazada.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p>El sensor de magnetómetro requiere una calibración inicial en el hardware real inclinando la placa para llenar la pantalla de puntos antes de obtener lecturas precisas.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>¡Correcto! Esta es la respuesta adecuada.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>El código grabado es incompatible con el procesador ARM de la Micro:bit.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Falta conectar una antena externa en el pin 0 para captar el norte magnético.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+  </question>
+  <question type="multichoice">
+    <name><text>Pregunta 12 (DOK 3) - Toma de Decisiones de Diseño de Interacción</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Un equipo diseña un dispositivo de asistencia para personas con discapacidad visual. El dispositivo debe emitir tonos de advertencia de distinta frecuencia según la distancia a un obstáculo y permitir pausar el sonido tocando suavemente la placa, sin requerir presionar botones mecánicos duros. Considerando que se utiliza una placa <b>Micro:bit v2</b>, ¿cuál es la combinación de componentes nativos más eficiente para este requerimiento?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<p><b>Explicación de la respuesta correcta:</b> La Micro:bit v2 cuenta con un <b>altavoz integrado</b> para sintetizar frecuencias de audio sin piezas externas y un <b>logotipo metálico capacitivo táctil</b> en la parte frontal superior que reacciona al toque táctil suave de un dedo (evento <i>al presionar el logo</i>).</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html"><text><![CDATA[<p>Respuesta correcta.</p>]]></text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text><![CDATA[<p>Respuesta parcialmente correcta.</p>]]></text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text><![CDATA[<p>Respuesta incorrecta.</p>]]></text></incorrectfeedback>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Utilizar el acelerómetro para el tono y el botón A para pausar.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p>Utilizar el altavoz (speaker) integrado para la generación de tonos y el logotipo táctil capacitivo (Touch Logo) en el frente para detectar la pulsación suave.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>¡Correcto! Esta es la respuesta adecuada.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Utilizar la antena de radio para emitir tonos y la pantalla LED como sensor de presión.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Conectar un zumbador externo al pin GND y usar el conector de batería como sensor de contacto.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+  </question>
+  <question type="multichoice">
+    <name><text>Pregunta 13 (DOK 3) - Evaluación de Algoritmos y Condicionales</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Un estudiante diseña un sistema de riego automatizado que debe activar una bomba de agua (conectada a un relé en el Pin 1) únicamente cuando la humedad del suelo sea baja (medida en el Pin 0) <b>Y TAMBIÉN</b> la luz del sol sea alta (para evitar riego nocturno). ¿Qué estructura lógica en MakeCode garantiza que ambas condiciones se evalúen con rigor analítico antes de enviar la señal de activación al Pin 1?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<p><b>Explicación de la respuesta correcta:</b> La toma de decisiones con múltiples restricciones requiere el operador lógico <b>Y (AND)</b>. Este exige que tanto la condición de baja humedad como la de suficiente luz ambiental sean verdaderas simultáneamente para ejecutar la acción de riego.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html"><text><![CDATA[<p>Respuesta correcta.</p>]]></text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text><![CDATA[<p>Respuesta parcialmente correcta.</p>]]></text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text><![CDATA[<p>Respuesta incorrecta.</p>]]></text></incorrectfeedback>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Un bloque condicional <code>Si [Humedad < 300] O [Luz > 150] entonces</code>.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p>Un bloque condicional <code>Si [Humedad < 300] Y [Luz > 150] entonces</code> que evalúe la conyunción lógica simultánea de ambas entradas.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>¡Correcto! Esta es la respuesta adecuada.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Dos bloques <i>Al iniciar</i> separados, uno para la humedad y otro para la luz.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Un bucle <i>Repetir 4 veces</i> sin comprobación de sensores.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+  </question>
+  <question type="multichoice">
+    <name><text>Pregunta 14 (DOK 3) - Análisis de Integración entre Software y Hardware</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>En un taller de robótica física, al conectar un servomotor al Pin 0 y probarlo con la Micro:bit alimentada únicamente desde el puerto USB del computador, el motor realiza movimientos erráticos y la Micro:bit se reinicia constantemente. Al desconectar el motor, la placa funciona bien. ¿Qué análisis de ingeniería explica este comportamiento y cuál es la solución adecuada?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<p><b>Explicación de la respuesta correcta:</b> Los actuadores mecánicos como motores y servos demandan corrientes mientas operan. Si se alimentan directamente desde los pines de la Micro:bit energizada por USB, la demanda de corriente supera la capacidad del regulador, haciendo caer el voltaje y reiniciando el microcontrolador. Se debe separar la potencia del actuador con una fuente externa manteniendo la masa de referencia común (GND).</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html"><text><![CDATA[<p>Respuesta correcta.</p>]]></text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text><![CDATA[<p>Respuesta parcialmente correcta.</p>]]></text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text><![CDATA[<p>Respuesta incorrecta.</p>]]></text></incorrectfeedback>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>El código de MakeCode tiene un error de sintaxis en el bucle principal.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p>El servomotor demanda un pico de corriente eléctrica superior al límite de seguridad que puede entregar el puerto USB/Micro:bit, provocando una caída de voltaje (brownout); la solución es alimentar el motor con una fuente externa compartiendo la línea de masa (GND).</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>¡Correcto! Esta es la respuesta adecuada.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>El Pin 0 solo admite señales digitales de entrada y no puede controlar motores.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>El puerto USB transmite interferencias magnéticas que corrompen el programa.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+  </question>
+  <question type="multichoice">
+    <name><text>Pregunta 15 (DOK 3) - Estrategia de Depuración y Prueba de Sistemas</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Un equipo está desarrollando un prototipo de podómetro (contador de pasos). Durante las pruebas iniciales, el contador incrementa 5 o 6 pasos con un solo movimiento leve de la mano. ¿Qué ajuste de pensamiento estratégico en el algoritmo y sensibilidad del sensor permite corregir este falso positivo?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<p><b>Explicación de la respuesta correcta:</b> Para evitar lecturas falsas en sensores de movimiento (acelerómetro), es una práctica clave de depuración ajustar la sensibilidad aumentando el umbral de disparo de fuerza g o introducir una pequeña pausa (retardo de tiempo) que impida contar múltiples picos producidos por la misma vibración o rebote del cuerpo.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
+    <correctfeedback format="html"><text><![CDATA[<p>Respuesta correcta.</p>]]></text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text><![CDATA[<p>Respuesta parcialmente correcta.</p>]]></text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text><![CDATA[<p>Respuesta incorrecta.</p>]]></text></incorrectfeedback>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Cambiar el acelerómetro por la brújula para contar los pasos.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p>Aumentar el umbral de fuerza de aceleración (fuerza g) requerida en el evento o implementar una variable de retardo/pausa (debounce) tras registrar cada paso para filtrar rebotes mecánicos.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>¡Correcto! Esta es la respuesta adecuada.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Mover el código al bloque <i>Al iniciar</i> para que no se repita.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Desactivar la pantalla LED para aumentar la velocidad del contador.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Incorrecto. Revisa la explicación general de la pregunta.</p>]]></text>
+      </feedback>
+    </answer>
+  </question>
+</quiz>

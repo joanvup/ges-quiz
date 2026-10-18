@@ -8,7 +8,7 @@ export function ImportadorMoodleBanco() {
   const router = useRouter();
   const [archivo, setArchivo] = useState<File | null>(null);
   const [cargando, setCargando] = useState(false);
-  const [resultado, setResultado] = useState<{ total: number; importadas: number; errores: string[] } | null>(null);
+  const [resultado, setResultado] = useState<{ total: number; importadas: number; errores: string[]; bancoNombre?: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   async function manejarImportacion(e: React.FormEvent) {
@@ -49,13 +49,15 @@ export function ImportadorMoodleBanco() {
   return (
     <Tarjeta
       titulo="Importar banco desde Moodle XML"
-      descripcion="Sube un archivo XML exportado desde Moodle para poblar automáticamente el banco de preguntas."
+      descripcion="Sube un archivo XML exportado desde Moodle. El nombre del banco de preguntas se asignará automáticamente a partir del nombre del archivo."
     >
       <form onSubmit={manejarImportacion} className="flex flex-col gap-4">
         {error && <Alerta tipo="error" titulo="Error">{error}</Alerta>}
         {resultado && (
           <Alerta tipo="exito" titulo="Importación completada">
-            Se importaron {resultado.importadas} de {resultado.total} preguntas correctamente.
+            Banco asignado:{' '}
+            <strong className="font-semibold">{resultado.bancoNombre || 'Banco Moodle'}</strong>.{' '}
+            Se importaron {resultado.importadas} de {resultado.total} preguntas correctamente con sus respectivas respuestas y retroalimentación.
             {resultado.errores.length > 0 && (
               <ul className="mt-2 list-disc pl-4 text-xs">
                 {resultado.errores.slice(0, 5).map((err, i) => (
