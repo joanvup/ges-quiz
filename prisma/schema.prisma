@@ -1,0 +1,359 @@
+// ---------------------------------------------------------------------------
+// QuizColegio - Esquema de datos
+// ---------------------------------------------------------------------------
+// NOTAS DE PORTABILIDAD SQLite -> PostgreSQL
+//  * SQLite no soporta enums nativos en Prisma, por eso los campos de estado
+//    y rol son `String` y se validan en la capa de aplicacion con Zod
+//    (ver src/lib/dominio/constantes.ts). Para PostgreSQL se pueden migrar a
+//    enums sin cambiar las columnas.
+//  * Los campos JSON se guardan como `String` (JSON serializado) para que el
+//    mismo esquema funcione en ambos motores. En PostgreSQL pueden pasar a
+//    `Json` con un cambio minimo en los helpers de lectura/escritura.
+//  * No se usan tipos nativos exclusivos de un motor.
+// ---------------------------------------------------------------------------
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite" // en produccion: "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Usuarios, sesiones y grupos
+// ---------------------------------------------------------------------------
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  role         String // ADMIN | TEACHER | STUDENT
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  sessions     Session[]
+  memberships  GroupMembership[]
+  documents    Document[]
+  questions    Question[]
+  quizzes      Quiz[]
+  attempts     Attempt[]
+  auditLogs    AuditLog[]
+  createdGroups Group[]  @relation("GroupCreator")
+
+  @@index([role, active])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  tokenHash    String   @unique
+  csrfToken    String
+  ip           String?
+  userAgent    String?
+  createdAt    DateTime @default(now())
+  lastSeenAt   DateTime @default(now())
+  expiresAt    DateTime
+  revokedAt    DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model Group {
+  id          String   @id @default(cuid())
+  name        String
+  grade       String? // curso / nivel, ej "10A"
+  year        String // ano escolar: "2026" o un ciclo como "2026-2027"
+  description String?
+  createdById String?
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  createdBy   User?             @relation("GroupCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  memberships GroupMembership[]
+  assignments QuizAssignment[]
+
+  @@unique([name, year])
+  @@index([year, active])
+}
+
+model GroupMembership {
+  id        String   @id @default(cuid())
+  userId    String
+  groupId   String
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, groupId])
+  @@index([groupId])
+}
+
+// ---------------------------------------------------------------------------
+// Documentos y banco de preguntas
+// ---------------------------------------------------------------------------
+
+model Document {
+  id            String   @id @default(cuid())
+  title         String
+  originalName  String
+  storagePath   String
+  mimeType      String
+  sizeBytes     Int
+  pageCount     Int      @default(0)
+  charCount     Int      @default(0)
+  chunkCount    Int      @default(0)
+  extractedText String   @default("") // texto completo extraido
+  pagesJson     String   @default("[]") // texto de cada pagina (JSON) para el chunking
+  status        String   @default("PENDING") // PENDING | EXTRACTED | EMPTY | FAILED | OCR_USED
+  errorMessage  String?
+  usedOcr       Boolean  @default(false)
+  uploadedById  String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  uploadedBy User       @relation(fields: [uploadedById], references: [id], onDelete: Cascade)
+  questions  Question[]
+
+  @@index([uploadedById, createdAt])
+}
+
+model Question {
+  id            String   @id @default(cuid())
+  type          String // MCQ_SINGLE | MCQ_MULTI | TRUE_FALSE | SHORT_ANSWER
+  statement     String
+  explanation   String?
+  topic         String?
+  sourcePage    Int?
+  difficulty    String   @default("MEDIUM") // EASY | MEDIUM | HARD
+  status        String   @default("DRAFT") // DRAFT | PENDING_REVIEW | APPROVED
+  points        Float    @default(1)
+  fingerprint   String? // hash normalizado del enunciado, para deduplicar
+  origin        String   @default("MANUAL") // MANUAL | GENERATED | IMPORTED
+  llmModel      String?
+  answerPending Boolean  @default(false) // importado sin respuesta correcta detectable
+  authorId      String
+  documentId    String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  author   User             @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  document Document?        @relation(fields: [documentId], references: [id], onDelete: SetNull)
+  options  QuestionOption[]
+  quizzes  QuizQuestion[]
+  answers  Answer[]
+
+  @@index([authorId, createdAt])
+  @@index([documentId])
+  @@index([fingerprint])
+}
+
+model QuestionOption {
+  id         String  @id @default(cuid())
+  questionId String
+  label      String // A, B, C...
+  text       String
+  isCorrect  Boolean @default(false)
+  position   Int
+
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@index([questionId, position])
+}
+
+// ---------------------------------------------------------------------------
+// Quices
+// ---------------------------------------------------------------------------
+
+model Quiz {
+  id          String  @id @default(cuid())
+  title       String
+  description String?
+  authorId    String
+  status      String  @default("DRAFT") // DRAFT | PUBLISHED | CLOSED
+
+  // Grupos -> via QuizAssignment
+
+  // Ventana de disponibilidad
+  availableFrom DateTime?
+  availableTo   DateTime?
+
+  // Navegacion: FORWARD_ONLY | FREE
+  navigationMode String @default("FREE")
+
+  // Tiempos (segundos, opcionales)
+  timeLimitSec      Int?
+  perQuestionTimeSec Int?
+
+  // Aleatorizacion
+  shuffleQuestions Boolean @default(false)
+  shuffleOptions   Boolean @default(false)
+
+  // Intentos y subconjunto
+  maxAttempts   Int  @default(1)
+  questionCount Int? // cuantas preguntas se toman del banco (null = todas)
+
+  // Calificacion
+  defaultPoints Float @default(1)
+  passingScore  Float @default(3) // nota minima de aprobacion
+  maxGrade      Float @default(5) // escala maxima de la nota
+  showResults   String @default("SCORE") // NONE | SCORE | SCORE_AND_ANSWERS
+  allowReview   Boolean @default(false) // revision final antes de enviar
+
+  // Modo seguro
+  secureMode          Boolean @default(false)
+  infractionThreshold Int     @default(3)
+  infractionAction    String  @default("AUTO_SUBMIT") // VOID | AUTO_SUBMIT | REGISTER_ONLY
+  blockWithoutFullscreen Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  publishedAt DateTime?
+
+  author      User             @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  questions   QuizQuestion[]
+  assignments QuizAssignment[]
+  attempts    Attempt[]
+
+  @@index([authorId, status])
+}
+
+model QuizQuestion {
+  id         String @id @default(cuid())
+  quizId     String
+  questionId String
+  position   Int
+  points     Float  @default(1)
+
+  quiz     Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([quizId, questionId])
+  @@index([quizId, position])
+}
+
+model QuizAssignment {
+  id        String   @id @default(cuid())
+  quizId    String
+  groupId   String
+  createdAt DateTime @default(now())
+
+  quiz  Quiz  @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@unique([quizId, groupId])
+  @@index([groupId])
+}
+
+// ---------------------------------------------------------------------------
+// Intentos, respuestas y proctoring
+// ---------------------------------------------------------------------------
+
+model Attempt {
+  id            String  @id @default(cuid())
+  quizId        String
+  studentId     String
+  attemptNumber Int
+  status        String  @default("IN_PROGRESS") // IN_PROGRESS | SUBMITTED | VOIDED
+
+  startedAt   DateTime  @default(now())
+  expiresAt   DateTime?
+  lastSeenAt  DateTime  @default(now())
+  submittedAt DateTime?
+  submitReason String? // MANUAL | TIME_UP | INFRACTIONS | FORCED
+
+  currentPosition Int @default(0) // indice dentro del orden de preguntas
+  questionStartedAt DateTime? // inicio del tiempo por pregunta
+  questionOrder   String @default("[]") // JSON: [questionId, ...]
+  optionOrder     String @default("{}") // JSON: { questionId: [optionId, ...] }
+
+  score        Float? @default(0)
+  maxScore     Float  @default(0)
+  grade        Float?
+  passed       Boolean?
+
+  infractions  Int @default(0)
+  voidedReason String?
+  ip           String?
+  userAgent    String?
+
+  quiz    Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  student User     @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  answers Answer[]
+  events  ProctorEvent[]
+
+  @@unique([quizId, studentId, attemptNumber])
+  @@index([studentId, status])
+  @@index([quizId, status])
+}
+
+model Answer {
+  id              String   @id @default(cuid())
+  attemptId       String
+  questionId      String
+  selectedOptions String   @default("[]") // JSON: [optionId, ...]
+  textAnswer      String?
+  isCorrect       Boolean?
+  pointsAwarded   Float    @default(0)
+  timeSpentSec    Int      @default(0)
+  isFinal         Boolean  @default(true) // false si quedo guardada pero no confirmada
+  answeredAt      DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  attempt  Attempt  @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([attemptId, questionId])
+  @@index([questionId])
+}
+
+model ProctorEvent {
+  id         String   @id @default(cuid())
+  attemptId  String
+  type       String // FULLSCREEN_EXIT | TAB_HIDDEN | WINDOW_BLUR | CONTEXT_MENU | COPY | PASTE | CUT | PRINT | SHORTCUT | SELECTION | FOCUS_LOST | NO_FULLSCREEN_SUPPORT
+  detail     String?
+  severity   String   @default("WARNING") // INFO | WARNING | CRITICAL
+  countsAsInfraction Boolean @default(true)
+  clientTs   DateTime?
+  occurredAt DateTime @default(now())
+  ip         String?
+  userAgent  String?
+
+  attempt Attempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+
+  @@index([attemptId, occurredAt])
+}
+
+// ---------------------------------------------------------------------------
+// Auditoria y configuracion global
+// ---------------------------------------------------------------------------
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  actorId    String?
+  action     String // LOGIN_OK | LOGIN_FAIL | USER_CREATED | QUIZ_PUBLISHED | ...
+  entityType String?
+  entityId   String?
+  meta       String? // JSON
+  ip         String?
+  createdAt  DateTime @default(now())
+
+  actor User? @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([createdAt])
+  @@index([action])
+}
+
+model Setting {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}

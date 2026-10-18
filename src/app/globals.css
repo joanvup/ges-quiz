@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 antialiased;
+}
+
+/* Accesibilidad: foco siempre visible */
+:focus-visible {
+  @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-white;
+}
+
+/* Area del quiz: sin seleccion de texto ni arrastre */
+.area-quiz,
+.area-quiz * {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.area-quiz input,
+.area-quiz textarea {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* En modo seguro deshabilitamos por completo la seleccion y el copiado */
+.modo-seguro-activo,
+.modo-seguro-activo * {
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
+
+@media print {
+  .no-imprimir {
+    display: none !important;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Tablas adaptables
+ *
+ * Por debajo del punto de quiebre `md` cada fila se convierte en una
+ * tarjeta con pares "etiqueta: valor", en lugar de obligar a desplazarse
+ * en horizontal y perder de vista el contexto de la fila. Las etiquetas
+ * se rellenan en `components/ui.tsx` (componente `Tabla`).
+ * ------------------------------------------------------------------ */
+@media (max-width: 767px) {
+  /*
+   * La tabla deja de ser un contexto de formato de tabla: asi los anchos
+   * al 100% y el diseno de tarjetas se comportan como se espera (si no,
+   * el navegador crea cajas anonimas y el contenido se desborda).
+   */
+  .tabla-adaptable {
+    @apply block w-full;
+  }
+
+  .tabla-adaptable thead {
+    /* La cabecera se reemplaza por las etiquetas de cada celda. */
+    @apply sr-only;
+  }
+
+  .tabla-adaptable tbody {
+    @apply flex w-full flex-col gap-3;
+  }
+
+  .tabla-adaptable tbody > tr {
+    @apply block w-full rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm;
+  }
+
+  .tabla-adaptable tbody > tr > td {
+    @apply flex w-full min-w-0 items-start justify-between gap-3 break-words border-0 px-0 py-1.5 text-left align-top;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  /* Los valores pueden encogerse para que quepan junto a la etiqueta. */
+  .tabla-adaptable tbody > tr > td > * {
+    min-width: 0;
+  }
+
+  .tabla-adaptable tbody > tr > td[data-etiqueta]::before {
+    content: attr(data-etiqueta);
+    @apply flex-none pt-0.5 text-[11px] font-semibold uppercase tracking-wide text-slate-500;
+  }
+
+  /* Celda que titula la tarjeta. */
+  .tabla-adaptable tbody > tr > td.tabla-principal {
+    @apply block border-b border-slate-100 pb-2 pt-0 text-left text-base font-semibold text-slate-900;
+  }
+
+  .tabla-adaptable tbody > tr > td.tabla-principal::before {
+    content: none;
+  }
+
+  /* Celda de acciones: los botones se alinean a la derecha. */
+  .tabla-adaptable tbody > tr > td.tabla-acciones {
+    @apply flex w-full flex-wrap justify-end gap-2 border-t border-slate-100 pt-3;
+  }
+
+  .tabla-adaptable tbody > tr > td.tabla-acciones::before {
+    content: none;
+  }
+
+  .tabla-adaptable tbody > tr > td:empty {
+    display: none;
+  }
+}

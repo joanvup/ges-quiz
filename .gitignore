@@ -1,0 +1,24 @@
+node_modules/
+.next/
+out/
+build/
+dist/
+.env
+.env.local
+.env*.local
+*.log
+npm-debug.log*
+
+# Base de datos SQLite local
+prisma/*.db
+prisma/*.db-journal
+dev.db
+dev.db-journal
+
+# Archivos subidos por los docentes
+storage/
+
+# Pruebas
+test-results/
+playwright-report/
+coverage/

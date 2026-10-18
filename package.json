@@ -1,0 +1,51 @@
+{
+  "name": "quizcolegio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "QuizColegio - Sistema de gestion y aplicacion de quices para colegios",
+  "scripts": {
+    "predev": "tsx scripts/preparar-base.ts",
+    "dev": "next dev",
+    "prebuild": "tsx scripts/preparar-base.ts",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "db:preparar": "tsx scripts/preparar-base.ts",
+    "db:inicializar": "tsx scripts/inicializar-base.ts",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "db:reset": "prisma db push --force-reset --skip-generate && npm run seed",
+    "preseed": "tsx scripts/preparar-base.ts",
+    "seed": "tsx prisma/seed.ts",
+    "postinstall": "prisma generate",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@prisma/client": "6.1.0",
+    "bcryptjs": "2.4.3",
+    "fast-xml-parser": "^5.11.2",
+    "next": "15.1.3",
+    "pdfjs-dist": "4.9.155",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "tesseract.js": "5.1.1",
+    "zod": "3.24.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.49.1",
+    "@types/bcryptjs": "2.4.6",
+    "@types/node": "22.10.2",
+    "@types/react": "19.0.2",
+    "@types/react-dom": "19.0.2",
+    "autoprefixer": "10.4.20",
+    "dotenv": "16.4.7",
+    "postcss": "8.4.49",
+    "prisma": "6.1.0",
+    "tailwindcss": "3.4.17",
+    "tsx": "4.19.2",
+    "typescript": "5.7.2",
+    "vitest": "2.1.8"
+  }
+}
