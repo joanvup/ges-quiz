@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Alerta, Boton, Tarjeta } from '@/components/ui';
 
-export function ImportadorMoodle({ documentoId }: { documentoId: string }) {
+export function ImportadorMoodleBanco() {
   const router = useRouter();
   const [archivo, setArchivo] = useState<File | null>(null);
   const [cargando, setCargando] = useState(false);
@@ -26,7 +26,7 @@ export function ImportadorMoodle({ documentoId }: { documentoId: string }) {
       const formData = new FormData();
       formData.append('archivo', archivo);
 
-      const res = await fetch(`/api/documentos/${documentoId}/moodle`, {
+      const res = await fetch('/api/preguntas/importar-moodle', {
         method: 'POST',
         body: formData,
       });
@@ -48,8 +48,8 @@ export function ImportadorMoodle({ documentoId }: { documentoId: string }) {
 
   return (
     <Tarjeta
-      titulo="Importar preguntas desde Moodle XML"
-      descripcion="Sube un archivo XML exportado desde Moodle para poblar automáticamente el banco de preguntas de este documento."
+      titulo="Importar banco desde Moodle XML"
+      descripcion="Sube un archivo XML exportado desde Moodle para poblar automáticamente el banco de preguntas."
     >
       <form onSubmit={manejarImportacion} className="flex flex-col gap-4">
         {error && <Alerta tipo="error" titulo="Error">{error}</Alerta>}

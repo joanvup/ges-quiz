@@ -3,6 +3,7 @@ import { requiereRol } from '@/lib/auth/guard';
 import { aPreguntaDto, INCLUDE_PREGUNTA_DTO } from '@/lib/preguntas/dto';
 import type { PreguntaDto } from '@/lib/cliente/tipos';
 import { BancoPreguntas } from '@/components/preguntas/BancoPreguntas';
+import { ImportadorMoodleBanco } from '@/components/preguntas/ImportadorMoodleBanco';
 
 export const dynamic = 'force-dynamic';
 
@@ -26,13 +27,15 @@ export default async function PaginaBancoPreguntas() {
   const preguntas: PreguntaDto[] = preguntasDb.map((pregunta) => aPreguntaDto(pregunta));
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-6">
       <div>
         <h1 className="text-2xl font-bold text-slate-900">Banco de preguntas</h1>
         <p className="mt-1 text-sm text-slate-600">
-          Todas tus preguntas en un solo lugar. Edita, aprueba o elimina preguntas antes de armar un quiz.
+          Gestiona tu banco de preguntas o importa cuestionarios directamente desde archivos XML de Moodle.
         </p>
       </div>
+
+      <ImportadorMoodleBanco />
 
       <BancoPreguntas
         iniciales={preguntas}

@@ -12,7 +12,6 @@ export function menuParaRol(rol: Rol | string): ItemMenu[] {
   if (rol === 'ADMIN') {
     return [
       ...comunes,
-      { href: '/docentes/documentos', etiqueta: 'Documentos', icono: 'documento' },
       { href: '/docentes/preguntas', etiqueta: 'Banco de preguntas', icono: 'preguntas' },
       { href: '/docentes/quices', etiqueta: 'Quices', icono: 'quices' },
       { href: '/reportes', etiqueta: 'Reportes', icono: 'reportes' },
@@ -28,7 +27,6 @@ export function menuParaRol(rol: Rol | string): ItemMenu[] {
   if (rol === 'TEACHER') {
     return [
       ...comunes,
-      { href: '/docentes/documentos', etiqueta: 'Documentos', icono: 'documento' },
       { href: '/docentes/preguntas', etiqueta: 'Banco de preguntas', icono: 'preguntas' },
       { href: '/docentes/quices', etiqueta: 'Quices', icono: 'quices' },
       { href: '/reportes', etiqueta: 'Reportes', icono: 'reportes' },

@@ -12,10 +12,10 @@ export default async function PaginaPanel() {
   const rol = usuario.role as Rol;
   const ajustes = await obtenerAjustes();
 
-  const [usuarios, grupos, documentos, quices, intentos] = await Promise.all([
+  const [usuarios, grupos, preguntas, quices, intentos] = await Promise.all([
     prisma.user.count(),
     prisma.group.count({ where: { active: true } }),
-    prisma.document.count(),
+    prisma.question.count(),
     prisma.quiz.count(),
     prisma.attempt.count(),
   ]);
@@ -51,7 +51,7 @@ export default async function PaginaPanel() {
         <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
           <Estadistica etiqueta="Usuarios" valor={usuarios} />
           <Estadistica etiqueta="Grupos activos" valor={grupos} tono="violeta" />
-          <Estadistica etiqueta="Documentos" valor={documentos} tono="ambar" />
+          <Estadistica etiqueta="Preguntas" valor={preguntas} tono="ambar" />
           <Estadistica etiqueta="Quices" valor={quices} tono="verde" />
         </div>
       )}
@@ -85,10 +85,10 @@ export default async function PaginaPanel() {
       {rol === 'TEACHER' && (
         <Tarjeta
           titulo="Tu trabajo"
-          descripcion="Sube material de estudio y crea quices para tus grupos."
+          descripcion="Importa cuestionarios desde Moodle XML y crea quices para tus grupos."
         >
           <div className="flex flex-wrap gap-2">
-            <EnlaceBoton href="/docentes/documentos">Subir documentos</EnlaceBoton>
+            <EnlaceBoton href="/docentes/preguntas">Banco de preguntas</EnlaceBoton>
             <EnlaceBoton href="/docentes/quices" variante="secundario">
               Mis quices
             </EnlaceBoton>
@@ -119,13 +119,11 @@ export default async function PaginaPanel() {
                   <div>
                     <p className="text-sm font-medium text-slate-800">{asignacion.quiz.title}</p>
                     <p className="text-xs text-slate-500">
-                      {asignacion.quiz.availableFrom
-                        ? `Disponible desde ${asignacion.quiz.availableFrom.toLocaleString('es-CO')}`
-                        : 'Disponible ahora'}
+                      Disponible hasta {asignacion.quiz.availableTo ? new Date(asignacion.quiz.availableTo).toLocaleString('es-CO') : 'Sin límite'}
                     </p>
                   </div>
-                  <EnlaceBoton href={`/estudiante/quices`} tamano="sm" variante="secundario">
-                    Ver
+                  <EnlaceBoton href={`/estudiante/quices/${asignacion.quiz.id}`} tamano="sm">
+                    Ir al quiz
                   </EnlaceBoton>
                 </li>
               ))}
@@ -133,27 +131,6 @@ export default async function PaginaPanel() {
           )}
         </Tarjeta>
       )}
-
-      <Tarjeta titulo="Estado del sistema" descripcion="Resumen rapido del uso de la plataforma.">
-        <dl className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
-          <div className="flex justify-between gap-2 border-b border-slate-100 pb-2">
-            <dt className="text-slate-600">Intentos de quiz registrados</dt>
-            <dd className="font-semibold text-slate-900">{intentos}</dd>
-          </div>
-          <div className="flex justify-between gap-2 border-b border-slate-100 pb-2">
-            <dt className="text-slate-600">Nota minina de aprobacion</dt>
-            <dd className="font-semibold text-slate-900">{ajustes['academico.notaMinima']}</dd>
-          </div>
-          <div className="flex justify-between gap-2 border-b border-slate-100 pb-2">
-            <dt className="text-slate-600">Intentos maximos por defecto</dt>
-            <dd className="font-semibold text-slate-900">{ajustes['quiz.intentosMaximos']}</dd>
-          </div>
-          <div className="flex justify-between gap-2 border-b border-slate-100 pb-2">
-            <dt className="text-slate-600">Tamano maximo de PDF</dt>
-            <dd className="font-semibold text-slate-900">{ajustes['archivos.maxMB']} MB</dd>
-          </div>
-        </dl>
-      </Tarjeta>
     </div>
   );
 }
