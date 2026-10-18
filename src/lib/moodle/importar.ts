@@ -8,6 +8,22 @@ export interface ResultadoImportacionMoodle {
   bancoNombre?: string;
 }
 
+function limpiarHtml(html: string): string {
+  if (!html) return '';
+  return html
+    .replace(/<br\s*[\/]?>/gi, '\n')
+    .replace(/<\/p>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 export async function importarMoodleXml(
   xmlContent: string,
   userId: string,
@@ -46,7 +62,8 @@ export async function importarMoodleXml(
       if (qType === 'category') continue;
 
       const statementRaw = q.questiontext?.text || q.questiontext || '';
-      const statement = typeof statementRaw === 'string' ? statementRaw.trim() : JSON.stringify(statementRaw);
+      const statementStr = typeof statementRaw === 'string' ? statementRaw : (statementRaw?.text ? String(statementRaw.text) : JSON.stringify(statementRaw));
+      const statement = limpiarHtml(statementStr);
       if (!statement) {
         errores.push(`Pregunta ${i + 1}: Sin enunciado`);
         continue;
@@ -54,9 +71,10 @@ export async function importarMoodleXml(
 
       // Explicación / retroalimentación general
       const generalFeedbackRaw = q.generalfeedback?.text || q.generalfeedback || '';
-      const explanation = typeof generalFeedbackRaw === 'string'
-        ? generalFeedbackRaw.trim()
-        : (generalFeedbackRaw?.text ? String(generalFeedbackRaw.text).trim() : null);
+      const explanationStr = typeof generalFeedbackRaw === 'string'
+        ? generalFeedbackRaw
+        : (generalFeedbackRaw?.text ? String(generalFeedbackRaw.text) : '');
+      const explanation = limpiarHtml(explanationStr);
 
       let tipoDb = 'MCQ_SINGLE';
       if (qType === 'truefalse') {
@@ -81,7 +99,7 @@ export async function importarMoodleXml(
         let correctFalse = false;
         for (const ans of answersList) {
           const frac = Number(ans['@_fraction'] ?? 0);
-          const txt = String(ans.text || ans).trim().toLowerCase();
+          const txt = limpiarHtml(String(ans.text || ans)).toLowerCase();
           if (frac > 0 && (txt === 'true' || txt === 'verdadero' || txt === '1')) correctTrue = true;
           if (frac > 0 && (txt === 'false' || txt === 'falso' || txt === '0')) correctFalse = true;
         }
@@ -89,7 +107,7 @@ export async function importarMoodleXml(
         optionsData.push({ label: 'B', text: 'Falso', isCorrect: correctFalse, position: 2 });
       } else if (tipoDb === 'SHORT_ANSWER') {
         const correctText = answersList.find((a: any) => Number(a['@_fraction'] ?? 0) > 0)?.text || '';
-        const ansText = typeof correctText === 'string' ? correctText.trim() : String(correctText);
+        const ansText = limpiarHtml(typeof correctText === 'string' ? correctText : String(correctText));
         optionsData.push({ label: 'A', text: ansText, isCorrect: true, position: 1 });
       } else {
         let pos = 1;
@@ -97,7 +115,8 @@ export async function importarMoodleXml(
           if (pos > 8) break;
           const frac = Number(ans['@_fraction'] ?? 0);
           const ansTextRaw = ans.text || ans;
-          const ansText = typeof ansTextRaw === 'string' ? ansTextRaw.trim() : String(ansTextRaw);
+          const ansTextStr = typeof ansTextRaw === 'string' ? ansTextRaw : String(ansTextRaw);
+          const ansText = limpiarHtml(ansTextStr);
           if (!ansText) continue;
           optionsData.push({
             label: labels[pos - 1] || String(pos),
